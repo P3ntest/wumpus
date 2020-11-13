@@ -85,12 +85,13 @@ client.on("message", message => {
             case "clear":
                 if (message.channel instanceof TextChannel) {
                     if (!config.ids.owners.includes(message.author.id))
-                    return;
+                        return;
 
                     if (Number.parseInt(args.trim()) != undefined) {
                         let textChannel: TextChannel = message.channel;
-                        textChannel.bulkDelete(Number.parseInt(args.trim()));
-                        message.channel.send(new MessageEmbed().setColor(config.messages.info.color).setDescription(":no_entry_sign: Deleted " + args + " messages"))
+                        textChannel.bulkDelete(Number.parseInt(args.trim()) + 1);
+                        message.channel.send(new MessageEmbed().setColor(config.messages.info.color).setDescription(":no_entry_sign:  Deleted " + args + " messages!"))
+                        .then(msg => msg.delete({timeout: 1700}));
                     }
                 }
 
