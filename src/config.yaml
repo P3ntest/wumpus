@@ -9,6 +9,8 @@ messages:
     color: "#e24c4b"
   info:
     color: "#7c76e0"
+  krunker:
+    color: "#ebdb67"
 ids:
   owners:
     - "357871005093462019"

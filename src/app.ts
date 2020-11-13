@@ -5,6 +5,9 @@ import arg from "arg";
 
 import { warn } from "./commands/warn";
 import { clear } from "./commands/clear";
+import { cmdecho } from "./commands/cmdecho";
+import { krunker } from "./triggers/krunker";
+import { compileFunction } from "vm";
 
 const client = new Client();
 
@@ -21,21 +24,17 @@ client.on("message", message => {
 
         switch (command.toLocaleLowerCase()) {
             case "cmdecho":
-                message.reply(new MessageEmbed()
-                .setTitle("Command Message Echo")
-                .setDescription("Echos the typed command back.")
-                .setColor(config.messages.info.color)
-                .addField("\u200b", "\u200b")
-                .addField("Message Content", message.cleanContent)
-                .addField("Command", command ? command : "", true)
-                .addField("Arguments", args ? args : "n.a.", true));
+                cmdecho(message, command, args, config);
                 break;
             case "warn":
                 warn(message, command, args, config);
+                break;
             case "clear":
                 clear(message, command, args, config);
                 break;
         }
+    } else if (message.content.toLocaleLowerCase().includes("://krunker.io/?game=")) {
+        krunker(message, config);
     }
 })
 
