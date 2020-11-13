@@ -61,6 +61,8 @@ client.on("message", message => {
 
                     embed.addField("Level", ":a:", true);
 
+                    embed.setImage("https://raw.githubusercontent.com/P3ntest/wumpus/main/images/warning.png");
+
                     if (parsed["-c"])
                         channel = message.mentions.channels.first(1)[0];
                     else
