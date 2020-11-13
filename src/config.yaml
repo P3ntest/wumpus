@@ -1,3 +1,6 @@
 bot:
   token: "BOT-TOKEN"
   prefix: "!"
+ids:
+  owners:
+    - "357871005093462019"
