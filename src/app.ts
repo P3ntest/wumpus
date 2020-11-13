@@ -8,6 +8,7 @@ import { clear } from "./commands/clear";
 import { cmdecho } from "./commands/cmdecho";
 import { krunker } from "./triggers/krunker";
 import { compileFunction } from "vm";
+import { github } from "./commands/github";
 
 const client = new Client();
 
