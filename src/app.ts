@@ -1,4 +1,4 @@
-import { Client, DMChannel, GuildMember, Message, MessageEmbed, MessageFlags, TextChannel } from "discord.js";
+import { Client, DMChannel, GuildMember, Message, MessageEmbed, MessageFlags, TextBasedChannel, TextChannel } from "discord.js";
 import * as YAML from "yamljs";
 import path from "path";
 import arg from "arg";
@@ -8,7 +8,7 @@ const client = new Client();
 const config = YAML.load(path.resolve(__dirname, "config.yaml"));
 
 client.on("ready", () => {
-    client.user?.setActivity("TypeScript Tutorials", {type: "WATCHING"});
+    client.user?.setActivity(config.bot.activity.message, {type: config.bot.activity.type});
 })
 
 client.on("message", message => {
@@ -21,7 +21,7 @@ client.on("message", message => {
                 message.reply(new MessageEmbed()
                 .setTitle("Command Message Echo")
                 .setDescription("Echos the typed command back.")
-                .setColor("#7c76e0")
+                .setColor(config.messages.info.color)
                 .addField("\u200b", "\u200b")
                 .addField("Message Content", message.cleanContent)
                 .addField("Command", command ? command : "", true)
@@ -37,18 +37,26 @@ client.on("message", message => {
                         "-h": Boolean, //Hide who warned
                     }, {permissive: true, argv: args.split(" ")});
                     if (message.mentions.members?.size == 0) {
-                        message.reply(new MessageEmbed().setColor("#ff0000").setDescription("Please specify a Member!"));
+                        message.reply(new MessageEmbed().setColor("#ff0000").setDescription("Please specify a Member!")).then(errorMessage => {
+                            errorMessage.delete({timeout: 1700});
+                        });
+                        message.delete();
                         return;
                     }
 
                     if (message.mentions.members?.first(1)[0] == null) {
-                        message.reply(new MessageEmbed().setColor("#ff0000").setDescription("An internal error occured."));
+                        message.reply(new MessageEmbed().setColor("#ff0000").setDescription("An error occured")).then(errorMessage => {
+                            errorMessage.delete({timeout: 1700});
+                        });
+                        message.delete();
                         return;
                     }
 
                     let warnedMember: GuildMember | null = message.mentions.members?.first(1)[0];
 
-                    let embed = new MessageEmbed().setColor("#7c76e0").setTitle("\u200b").setTimestamp();
+                    let embed = new MessageEmbed().setColor(config.messages.warn.color).setTitle("\u200b").setTimestamp();
+
+                    embed.setThumbnail("https://raw.githubusercontent.com/P3ntest/wumpus/main/images/warning.png");
 
                     let channel: TextChannel;
 
@@ -61,8 +69,6 @@ client.on("message", message => {
 
                     embed.addField("Level", ":a:", true);
 
-                    embed.setImage("https://raw.githubusercontent.com/P3ntest/wumpus/main/images/warning.png");
-
                     if (parsed["-c"])
                         channel = message.mentions.channels.first(1)[0];
                     else
@@ -70,11 +76,27 @@ client.on("message", message => {
 
                     channel.send(embed);
 
-                    message.delete();
+                    if (!parsed["-c"])
+                        message.delete();
 
                 } else {
                     message.reply(new MessageEmbed().setColor("#ff0000").setDescription("This only works in servers."));
                 }
+            case "clear":
+                if (message.channel instanceof TextChannel) {
+                    if (!config.ids.owners.includes(message.author.id))
+                    return;
+
+                    if (Number.parseInt(args.trim()) != undefined) {
+                        let textChannel: TextChannel = message.channel;
+                        textChannel.bulkDelete(Number.parseInt(args.trim()));
+                        message.channel.send(new MessageEmbed().setColor(config.messages.info.color).setDescription(":no_entry_sign: Deleted " + args + " messages"))
+                    }
+                }
+
+
+
+                break;
             case "":
                 break;
             default:
