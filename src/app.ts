@@ -33,7 +33,7 @@ client.on("message", message => {
                 clear(message, command, args, config);
                 break;
         }
-    } else if (message.content.toLocaleLowerCase().includes("://krunker.io/?game=")) {
+    } else if (message.content.toLocaleLowerCase().includes("krunker.io/?game=")) {
         krunker(message, config);
     }
 })
