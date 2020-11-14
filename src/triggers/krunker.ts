@@ -2,8 +2,6 @@ import { Message, MessageEmbed, TextChannel } from "discord.js";
 
 const { getMatchInformation } = require("krunker-api");
 
-const maps = require("./krunkerMaps.json");
-
 export function krunker(message: Message, config: any) {
     let krunkerCode = message.content.split("krunker.io/?game=")[1].split(" ")[0].trim();
     let krunkerUrl = "https://krunker.io/?game=" + krunkerCode;
