@@ -1,15 +1,15 @@
 import { Client, DMChannel, GuildMember, Message, MessageEmbed, MessageFlags, TextBasedChannel, TextChannel } from "discord.js";
-import * as YAML from "yamljs";
+
 import path from "path";
 
 import { warn } from "./commands/warn";
 import { clear } from "./commands/clear";
 import { cmdecho } from "./commands/cmdecho";
 import { krunker } from "./triggers/krunker";
+import { loadConfig } from "./libs/configManager";
 
 const client = new Client();
-
-const config = YAML.load(path.resolve(__dirname, "config.yaml"));
+const config = loadConfig();
 
 client.on("ready", () => {
     client.user?.setActivity(config.bot.activity.message, {type: config.bot.activity.type});
