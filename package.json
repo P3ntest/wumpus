@@ -21,6 +21,8 @@
     "arg": "^4.1.3",
     "discord.js": "^12.4.1",
     "express": "^4.17.1",
+    "krunker-api": "^1.0.1",
+    "request": "^2.88.2",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
