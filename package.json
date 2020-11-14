@@ -4,7 +4,9 @@
   "description": "A personalised Discord Bot",
   "main": "./dist/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tsc && node .",
+    "postinstall": "tsc",
+    "start": "node ."
   },
   "repository": {
     "type": "git",
