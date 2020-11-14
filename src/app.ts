@@ -1,13 +1,11 @@
 import { Client, DMChannel, GuildMember, Message, MessageEmbed, MessageFlags, TextBasedChannel, TextChannel } from "discord.js";
 import * as YAML from "yamljs";
 import path from "path";
-import arg from "arg";
 
 import { warn } from "./commands/warn";
 import { clear } from "./commands/clear";
 import { cmdecho } from "./commands/cmdecho";
 import { krunker } from "./triggers/krunker";
-import { compileFunction } from "vm";
 
 const client = new Client();
 
@@ -35,6 +33,10 @@ client.on("message", message => {
         }
     } else if (message.content.toLocaleLowerCase().includes("krunker.io/?game=")) {
         krunker(message, config);
+    } else {
+        if (!message.content.includes(" ")) {
+
+        }
     }
 })
 
