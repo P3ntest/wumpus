@@ -7,6 +7,8 @@ A personalised Discord Bot for one Serer.
     `git clone https://github.com/P3ntest/wumpus && cd wumpus`
 2) Install
     `npm install`
+3) Make sure canvas is installed correctly
+    [Tutorial](https://github.com/Automattic/node-canvas/wiki)
 3) Run
     `npm start`
 

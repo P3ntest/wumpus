@@ -7,6 +7,8 @@ import { clear } from "./commands/clear";
 import { cmdecho } from "./commands/cmdecho";
 import { krunker } from "./triggers/krunker";
 import { loadConfig } from "./libs/configManager";
+import { user } from "./commands/user";
+import { info } from "./commands/info";
 
 const client = new Client();
 const config = loadConfig();
@@ -29,6 +31,12 @@ client.on("message", message => {
                 break;
             case "clear":
                 clear(message, command, args, config);
+                break;
+            case "user":
+                user(message, command, args, config);
+                break;
+            case "info":
+                info(message, command, args, config);
                 break;
         }
     } else if (message.content.toLocaleLowerCase().includes("krunker.io/?game=")) {
