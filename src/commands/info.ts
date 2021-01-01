@@ -5,7 +5,7 @@ const timestampFromSnowflake = (id: number) => {
 };
 
 export async function info(message: Message, command: string, args: string, config: any) {
-    let member = message.member;
+    let member: any = message.member;
     if (message.mentions.members && message.mentions.members.size > 0)
         member = message.mentions.members.first(1)[0] ?? "";
     

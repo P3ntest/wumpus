@@ -9,6 +9,7 @@ import { krunker } from "./triggers/krunker";
 import { loadConfig } from "./libs/configManager";
 import { info } from "./commands/info";
 import { send } from "./commands/send";
+import { WebInterface } from "./web/WebInterface";
 
 const client = new Client();
 const config = loadConfig();
@@ -48,6 +49,7 @@ client.on("message", message => {
     }
 })
 
-
+const webInterface = new WebInterface(client, 9000, config);
+webInterface.start();
 
 client.login(config.bot.token);
