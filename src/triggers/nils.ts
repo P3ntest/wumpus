@@ -3,12 +3,12 @@ import { Message, MessageEmbed, TextChannel } from "discord.js";
 const { getMatchInformation } = require("krunker-api");
 
 export const triggers = [
-  "im",
-  "i am",
-  "i'm",
-  "i' m",
-  "i 'm",
-  "bin"
+  "im ",
+  "i am ",
+  "i'm ",
+  "i' m ",
+  "i 'm ",
+  "bin "
 ]
 
 export function isTrigger(content) {
