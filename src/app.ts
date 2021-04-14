@@ -12,6 +12,7 @@ import { send } from "./commands/send";
 import { WebInterface } from "./web/WebInterface";
 import { ttt } from "./commands/ttt";
 import { w2g } from "./commands/w2g";
+import { isTrigger, nils } from "./triggers/nils";
 
 export const client = new Client();
 const config = loadConfig();
@@ -50,7 +51,11 @@ client.on("message", async message => {
         }
     } else if (message.content.toLocaleLowerCase().includes("krunker.io/?game=")) {
         krunker(message, config);
-    } else {
+    } else if (isTrigger(message.content)) {
+        nils(message, config);
+    }
+    
+    else {
         if (!message.content.includes(" ")) {
 
         }
