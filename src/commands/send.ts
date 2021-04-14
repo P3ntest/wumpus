@@ -5,5 +5,5 @@ export function send(message: Message, command: string, args: string, config: an
         return;
     
     message.mentions.channels.first(1)[0].send(message.content.split("-")[1]);
-
+    message.delete();
 }
