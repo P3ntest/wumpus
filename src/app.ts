@@ -13,6 +13,7 @@ import { WebInterface } from "./web/WebInterface";
 import { ttt } from "./commands/ttt";
 import { w2g } from "./commands/w2g";
 import { isTrigger, nils } from "./triggers/nils";
+import { dad } from "./commands/dad";
 
 export const client = new Client();
 const config = loadConfig();
@@ -48,6 +49,8 @@ client.on("message", async message => {
             case "w2g":
                 w2g(message, command, args, config);
                 break;
+            case "dad":
+                dad(message, command, args, config);
         }
     } else if (message.content.toLocaleLowerCase().includes("krunker.io/?game=")) {
         krunker(message, config);
