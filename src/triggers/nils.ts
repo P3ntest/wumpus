@@ -31,5 +31,5 @@ function getTrigger(content) {
 
 export function nils(message: Message, config: any) {
   if (!message.author.bot)
-  message.channel.send("Hey " + message.content.split(getTrigger(message.content))[1].trim() + ", ich bin <@414457857682178050>");
+  message.channel.send("Hey " + message.content.toLowerCase().split(getTrigger(message.content))[1].trim() + ", ich bin <@414457857682178050>");
 }
