@@ -1,5 +1,6 @@
 bot:
   token: "BOT-TOKEN"
+  w2g: "token"
   prefix: "!"
   activity:
     message: "Minecraft Tutorials"

@@ -10,15 +10,17 @@ import { loadConfig } from "./libs/configManager";
 import { info } from "./commands/info";
 import { send } from "./commands/send";
 import { WebInterface } from "./web/WebInterface";
+import { ttt } from "./commands/ttt";
+import { w2g } from "./commands/w2g";
 
-const client = new Client();
+export const client = new Client();
 const config = loadConfig();
 
 client.on("ready", () => {
     client.user?.setActivity(config.bot.activity.message, {type: config.bot.activity.type});
 })
 
-client.on("message", message => {
+client.on("message", async message => {
     if (message.content.startsWith(config.bot.prefix)) {
         let command = message.content.split(" ")[0].substr(config.bot.prefix.length);
         let args = message.cleanContent.substr(command.length + config.bot.prefix.length);
@@ -39,6 +41,12 @@ client.on("message", message => {
             case "send":
                 send(message, command, args, config);
                 break;
+            case "ttt":
+                ttt(message, command, args, config);
+                break;
+            case "w2g":
+                w2g(message, command, args, config);
+                break;
         }
     } else if (message.content.toLocaleLowerCase().includes("krunker.io/?game=")) {
         krunker(message, config);
@@ -53,3 +61,5 @@ const webInterface = new WebInterface(client, 9000, config);
 webInterface.start();
 
 client.login(config.bot.token);
+
+console.log("started.");
