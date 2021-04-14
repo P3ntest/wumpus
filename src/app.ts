@@ -14,6 +14,9 @@ import { ttt } from "./commands/ttt";
 import { w2g } from "./commands/w2g";
 import { isTrigger, nils } from "./triggers/nils";
 import { dad } from "./commands/dad";
+import { face } from "./commands/face";
+import { DiffieHellman } from "crypto";
+import { help } from "./commands/help";
 
 export const client = new Client();
 const config = loadConfig();
@@ -51,6 +54,12 @@ client.on("message", async message => {
                 break;
             case "dad":
                 dad(message, command, args, config);
+                break;
+            case "face":
+                face(message, command, args, config);
+                break;
+            case "help":
+                help(message, command, args, config);
         }
     } else if (message.content.toLocaleLowerCase().includes("krunker.io/?game=")) {
         krunker(message, config);
