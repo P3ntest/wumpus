@@ -13,5 +13,5 @@ A personalised Discord Bot for one Serer.
     `npm start`
 
 
-## Develping
+## Developing
 Clone the repository and install it. Use `npm test` to build & run it.
